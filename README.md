@@ -1,1 +1,3 @@
 # NavalBattleJava
+
+Naval Battle Game
