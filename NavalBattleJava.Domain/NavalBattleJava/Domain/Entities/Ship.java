@@ -5,7 +5,18 @@ public abstract class Ship {
     private boolean destroyed = false;
     private int positionX;
     private int positionY;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String description;
+
+    public String getName() {
+        return name;
+    }
+
+    private String name;
 
     public String getDescription() {
         return description;
