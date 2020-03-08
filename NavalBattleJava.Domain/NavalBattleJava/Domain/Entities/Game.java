@@ -3,7 +3,7 @@ package NavalBattleJava.Domain.Entities;
 import NavalBattleJava.Domain.Entities.NavalBattleJava.Domain.Entities.Enums.AttackFeedback;
 import java.util.List;
 
-public class Player {
+public class Game {
     private String[][] map = new String[][]{
             { "", "", "", "", "", "", "", "", "", "" },
             { "", "", "", "", "", "", "", "", "", "" },
@@ -18,11 +18,17 @@ public class Player {
     };
     private int[][] hitMap = new int[10][10];
     public List<Ship> ships;
-
-    public Player(List<Ship> ships) {
+    public Game() {
+    }
+    public Game(List<Ship> ships) {
         this.ships = ships;
     }
-
+    public void setMap(String[][] map) {
+        this.map = map;
+    }
+    public void setHitMap(int[][] hitMap) {
+        this.hitMap = hitMap;
+    }
     public boolean positionShip(Ship ship){
         if (checkPositions(ship)){
             int size = 0;
@@ -35,7 +41,6 @@ public class Player {
         }
         return false;
     }
-
     public String checkAttackFeedback(int positionX, int positionY, AttackFeedback feedback){
         if (feedback == AttackFeedback.SUCCESS){
             hitMap[positionX][positionY] = 1;
@@ -47,7 +52,6 @@ public class Player {
         }
         return "You hit the ocean :(";
     }
-
     public boolean checkGameOver(){
         for (int i = 0; i < 10; i++) {
             for(int j =0; j < 10; j++) {
@@ -58,11 +62,9 @@ public class Player {
         }
         return true;
     }
-
     public boolean isValidPosition(int position) {
         return position < 10 && position >= 0;
     }
-
     public AttackFeedback receiveAttack(int positionX, int positionY){
         if (hitMap[positionX][positionY] == 1)
             return AttackFeedback.REPEAT;
@@ -72,11 +74,9 @@ public class Player {
 
         return AttackFeedback.FAILED;
     }
-
     public boolean attackIsValid(int positionX, int  positionY){
         return positionX >= 0 && positionX < 10 && positionY >= 0 && positionY < 10;
     }
-
     public boolean isShipDestroyed (String description){
         for (int i = 0; i < 10; i++) {
             for(int j =0; j < 10; j++) {
